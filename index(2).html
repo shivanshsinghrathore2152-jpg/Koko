@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#160d0b">
+<title>FODDY CORNER | Order Online</title>
+<style>
+:root{--gold:#e8b85b;--cream:#fff5e6;--muted:#c8b8a5;--panel:#241714;--line:#493128;--red:#9f3027}
+*{box-sizing:border-box}body{margin:0;background:#160d0b;color:var(--cream);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#160d0bee;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:13px 5%;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:22px;font-weight:900;letter-spacing:2px;color:var(--gold)}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:3px}
+button{cursor:pointer;border:0;border-radius:10px;font-weight:750}.cart-top{background:var(--gold);color:#24150d;padding:11px 15px}
+.hero{min-height:300px;padding:55px 7%;display:flex;align-items:center;background:linear-gradient(90deg,#160d0bf2,#160d0b99),url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1800&q=85') center/cover}
+.hero h1{font-size:clamp(38px,7vw,68px);line-height:1.02;margin:0 0 12px;max-width:650px}.hero h1 span{color:var(--gold)}.hero p{color:#e2d4c3;font-size:17px;max-width:540px}
+main{max-width:1200px;margin:auto;padding:28px 18px 70px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap}.section-head h2{font-size:30px;margin:0}.section-head p{color:var(--muted);margin:6px 0 0}
+.tools{display:flex;gap:9px;margin:20px 0;flex-wrap:wrap}.tools input{flex:1;min-width:180px}.tools input,.tools select,.customer input{background:#241714;border:1px solid var(--line);color:var(--cream);padding:12px;border-radius:10px}
+.categories{display:flex;gap:8px;overflow:auto;padding:2px 0 14px}.categories button{white-space:nowrap;background:#2b1c17;color:var(--muted);padding:9px 14px}.categories button.active{background:var(--gold);color:#20120d}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:17px}.item{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 25px #0002}
+.food-img{height:165px;width:100%;object-fit:cover;background:#39251e}.food-placeholder{height:165px;display:grid;place-items:center;background:radial-gradient(circle,#56392b,#251713);font-size:54px}
+.item-body{padding:14px;display:flex;flex-direction:column;flex:1}.item h3{margin:0 0 5px;font-size:18px}.item .desc{color:var(--muted);font-size:13px;min-height:34px;margin:0 0 12px}.price-row{display:flex;justify-content:space-between;align-items:center;margin-top:auto}.price{font-weight:850;color:var(--gold);font-size:20px}.add{background:var(--gold);color:#24150d;padding:10px 14px}
+.cart-panel{margin-top:35px;background:#211511;border:1px solid var(--line);border-radius:16px;padding:18px}.cart-panel h2{margin:0 0 12px}.cart-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:12px 0}.qty{display:flex;align-items:center;gap:9px}.qty button{width:28px;height:28px;background:#4a3026;color:white}.remove{background:none;color:#ff9b8d;padding:5px}.total{display:flex;justify-content:space-between;font-size:21px;font-weight:850;padding:17px 0;color:var(--gold)}
+.checkout{background:var(--gold);color:#21130d;padding:13px 18px;width:100%;font-size:16px}.empty{color:var(--muted);padding:12px 0}
+footer{text-align:center;padding:25px;color:var(--muted);border-top:1px solid var(--line);font-size:13px}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:10;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.modal-card{width:min(430px,100%);background:#241714;border:1px solid var(--line);border-radius:18px;padding:22px}.modal-card h2{margin-top:0}.customer{display:grid;gap:12px}.customer label{font-size:13px;color:var(--muted)}.customer input{width:100%;margin-top:5px}.modal-actions{display:flex;gap:10px;margin-top:17px}.modal-actions button{padding:12px;flex:1}.cancel{background:#493128;color:white}.send{background:var(--gold);color:#24150d}
+.notice{font-size:12px;color:var(--muted);line-height:1.5;margin-top:12px}
+@media(max-width:600px){header{padding:12px 4%}.brand{font-size:18px}.hero{min-height:260px;padding:40px 6%}.hero p{font-size:15px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.food-img,.food-placeholder{height:125px}.item-body{padding:11px}.item h3{font-size:15px}.item .desc{font-size:12px}.price{font-size:17px}.add{padding:9px 10px;font-size:12px}.cart-panel{padding:14px}}
+</style>
+</head>
+<body>
+<header><div class="brand">FODDY CORNER<small>GOOD FOOD · GOOD MOOD</small></div><button class="cart-top" onclick="document.getElementById('your-cart').scrollIntoView({behavior:'smooth'})">🛒 Cart <span id="cart-count">0</span></button></header>
+<section class="hero"><div><h1>Fresh food.<br><span>Happy moments.</span></h1><p>Explore our menu, add your favourites to the cart and order directly from your table.</p></div></section>
+<main>
+<div class="section-head"><div><h2>Our Menu</h2><p>Choose your favourites from FODDY CORNER.</p></div></div>
+<div class="tools"><input id="search" type="search" placeholder="Search food..." oninput="renderMenu()"><select id="sort" onchange="renderMenu()"><option value="default">Sort: Recommended</option><option value="low">Price: Low to high</option><option value="high">Price: High to low</option></select></div>
+<div class="categories" id="categories"></div>
+<div class="grid" id="menu"></div>
+<section class="cart-panel" id="your-cart"><h2>🛒 Your Cart</h2><div id="cart-items"><div class="empty">Your cart is empty. Add something delicious!</div></div><div class="total"><span>Total</span><span id="total">₹0</span></div><button class="checkout" onclick="openCheckout()">Continue to WhatsApp Order</button><p class="notice">Your order will be sent to the restaurant on WhatsApp. Please tap Send in WhatsApp to confirm it.</p></section>
+</main>
+<footer>© <span id="year"></span> FODDY CORNER · Thank you for choosing us!</footer>
+<div class="modal" id="checkout-modal"><div class="modal-card"><h2>Complete your order</h2><div class="customer">
+<label>Your name<input id="customer-name" placeholder="Enter your name" autocomplete="name"></label>
+<label>Table number<input id="table-number" type="number" min="1" max="25" placeholder="Enter table number"></label>
+<label>Extra instructions (optional)<input id="instructions" placeholder="e.g. Less spicy, no onion"></label>
+</div><div class="modal-actions"><button class="cancel" onclick="closeCheckout()">Cancel</button><button class="send" onclick="sendOrder()">Order on WhatsApp</button></div><p class="notice">WhatsApp number: +91 8003779544</p></div></div>
+<script>
+const WHATSAPP_NUMBER='918003779544';
+const menuItems=[
+{id:1,name:'Pizza',price:300,category:'Fast Food',emoji:'🍕',description:'Delicious cheesy pizza.'},
+{id:2,name:'Burger',price:79,category:'Fast Food',emoji:'🍔',description:'Tasty burger for a quick bite.'},
+{id:3,name:'Cold Drink',price:40,category:'Drinks',emoji:'🥤',description:'Chilled refreshing drink.'},
+{id:4,name:'Paneer Tikka',price:100,category:'Starters',emoji:'🧀',description:'Spiced and grilled paneer.'},
+{id:5,name:'Paneer Sabzi',price:200,category:'Main Course',emoji:'🍛',description:'Rich paneer curry.'},
+{id:6,name:'Matar Paneer',price:230,category:'Main Course',emoji:'🍲',description:'Paneer and green peas curry.'},
+{id:7,name:'Chapati',price:8,category:'Breads',emoji:'🫓',description:'Freshly prepared chapati.'},
+{id:8,name:'Brownie with Ice Cream',price:100,category:'Desserts',emoji:'🍨',description:'Chocolate brownie served with ice cream.'},
+{id:9,name:'Red Pasta',price:80,category:'Pasta',emoji:'🍝',description:'Pasta tossed in red sauce.'},
+{id:10,name:'White Pasta',price:100,category:'Pasta',emoji:'🍝',description:'Creamy white sauce pasta.'}
+];
+let cart=JSON.parse(localStorage.getItem('foddyCart')||'{}'),activeCategory='All';
+const categories=['All',...new Set(menuItems.map(x=>x.category))];
+function money(n){return '₹'+n}
+function save(){localStorage.setItem('foddyCart',JSON.stringify(cart));renderCart()}
+function add(id){cart[id]=(cart[id]||0)+1;save()}
+function change(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];save()}
+function renderCategories(){document.getElementById('categories').innerHTML=categories.map(c=>`<button class="${activeCategory===c?'active':''}" onclick="activeCategory=${JSON.stringify(c)};renderCategories();renderMenu()">${c}</button>`).join('')}
+function renderMenu(){
+let q=document.getElementById('search').value.toLowerCase(),sort=document.getElementById('sort').value;
+let list=menuItems.filter(x=>(activeCategory==='All'||x.category===activeCategory)&&x.name.toLowerCase().includes(q));
+if(sort==='low')list.sort((a,b)=>a.price-b.price);if(sort==='high')list.sort((a,b)=>b.price-a.price);
+document.getElementById('menu').innerHTML=list.map(x=>`<article class="item"><div class="food-placeholder" aria-label="${x.name} photo">${x.emoji}</div><div class="item-body"><h3>${x.name}</h3><p class="desc">${x.description}</p><div class="price-row"><span class="price">${money(x.price)}</span><button class="add" onclick="add(${x.id})">＋ Add</button></div></div></article>`).join('')||'<p class="empty">No menu items found.</p>';
+}
+function renderCart(){
+let entries=menuItems.filter(x=>cart[x.id]),count=entries.reduce((s,x)=>s+cart[x.id],0),total=entries.reduce((s,x)=>s+x.price*cart[x.id],0);
+document.getElementById('cart-count').textContent=count;document.getElementById('total').textContent=money(total);
+document.getElementById('cart-items').innerHTML=entries.length?entries.map(x=>`<div class="cart-row"><div><strong>${x.name}</strong><br><small>${money(x.price)} each</small></div><div class="qty"><button onclick="change(${x.id},-1)">−</button><b>${cart[x.id]}</b><button onclick="change(${x.id},1)">+</button><button class="remove" onclick="delete cart[${x.id}];save()">Remove</button></div></div>`).join(''):'<div class="empty">Your cart is empty. Add something delicious!</div>';
+}
+function openCheckout(){if(!Object.keys(cart).length){alert('Please add at least one item to your cart.');return}document.getElementById('checkout-modal').classList.add('show')}
+function closeCheckout(){document.getElementById('checkout-modal').classList.remove('show')}
+function sendOrder(){
+let name=document.getElementById('customer-name').value.trim(),table=document.getElementById('table-number').value.trim(),instructions=document.getElementById('instructions').value.trim();
+if(!name||!table||Number(table)<1||Number(table)>25){alert('Please enter your name and a valid table number (1–25).');return}
+let entries=menuItems.filter(x=>cart[x.id]),total=entries.reduce((s,x)=>s+x.price*cart[x.id],0);
+let lines=entries.map(x=>`${x.name} x ${cart[x.id]} = ${money(x.price*cart[x.id])}`);
+let message=`Hello FODDY CORNER! I would like to place an order.\n\nCustomer: ${name}\nTable: ${table}\n\nORDER:\n${lines.join('\n')}\n\nTotal: ${money(total)}${instructions?'\nInstructions: '+instructions:''}\n\nPlease confirm my order.`;
+window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(message),'_blank');
+}
+document.getElementById('year').textContent=new Date().getFullYear();renderCategories();renderMenu();renderCart();
+</script>
+</body>
+</html>
